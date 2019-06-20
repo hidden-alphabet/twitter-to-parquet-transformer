@@ -1,2 +1,4 @@
 *.svg
 .DS_Store
+*.html
+profile.txt
