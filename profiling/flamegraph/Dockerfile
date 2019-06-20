@@ -1,3 +1,8 @@
+# usage: docker run \
+#           -v $PWD:$PWD \
+#           -w $PWD \
+#           flamegraph profile.txt \
+#           > flamegraph.svg
 FROM ubuntu:bionic
 LABEL maintainer "Cole Hudson <cole@colejhudson.com>"
 
@@ -9,7 +14,7 @@ RUN apt-get update -y && \
 RUN git clone https://github.com/brendangregg/FlameGraph.git
 
 RUN chmod +x ./FlameGraph/flamegraph.pl && \
-    ln -s $(pwd)/FlameGraph/flamegraph.pl /usr/bin/flamegraph 
+    ln -s $(pwd)/FlameGraph/flamegraph.pl /usr/bin/flamegraph
 
 ENTRYPOINT ["flamegraph"]
 
