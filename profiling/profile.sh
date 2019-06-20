@@ -17,13 +17,25 @@ curl \
   > $FILE
 
 docker run \
+    --rm \
     -v $PWD:$PWD \
+    -w $PWD \
     --cap-add SYS_PTRACE \
-    html_to_parquet \
-    --flamegraph \
-    -o $PWD/profile.txt \
-    -t python3 $CMD $FILE
+    pyflame \
+      -o $STACKTRACE \
+      -t python3 $CMD $FILE
 
-docker run flamegraph $PWD/profile.txt > flamegraph.svg
+docker run \
+  --rm \
+  -v $PWD:$PWD \
+  -w $PWD \
+  flamegraph $STACKTRACE \
+  > $FLAMEGRAPH
 
-open -a "Google Chrome" flamegraph.svg
+swift <<-SWIFT
+import AppKit
+
+if let url = URL(string: "file://$FLAMEGRAPH") {
+  NSWorkspace.shared.open(url)
+}
+SWIFT
