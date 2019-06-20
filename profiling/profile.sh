@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 FILE=$PWD/profiling/example.html
-CMD=$PWD/profiling/test_lambda.py
+CMD=$PWD/profiling/test.py
 
 docker run \
     -v $PWD:$PWD \
