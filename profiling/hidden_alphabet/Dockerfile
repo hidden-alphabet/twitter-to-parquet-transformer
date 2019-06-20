@@ -1,4 +1,5 @@
 # usage: docker run \
+#         -v $PWD:/app \
 #         --cap-add SYS_PTRACE \
 #         hidden_alphabet:twitter-transformer-profiling \
 #         > stacktrace.svg
