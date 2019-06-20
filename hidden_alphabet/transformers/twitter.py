@@ -28,6 +28,7 @@ def tweet_element_to_dictionary(el):
         'tweet_item_id': el.attrs.get('data-item-id'),
         'tweet_conversation_id': el.attrs.get('data-conversation-id'),
         'tweet_text_html': el.find("p", {"class" : "tweet-text"}).renderContents(),
+        'tweet_text': el.find("p", {"class" : "tweet-text"}).text,
         'tweet_time': el.find("a", {"class": "tweet-timestamp"}).attrs.get('title'),
         'tweet-nonce': el.attrs.get('data-tweet-nonce'),
         'tweet_language': el.find("p", {"class" : "tweet-text"}).attrs.get('lang'),
