@@ -5,7 +5,7 @@ FN_ROLE_ARN := arn:aws:iam::$(AWS_USER_ID):role/aws-lambda-cli-role
 FN_BUNDLE := $(FN_NAME).zip
 
 AWS_S3_BUCKET := hidden-alphabet
-AWS_S3_KEY := functions/pipeline/transformer
+AWS_S3_KEY := functions
 
 DEPS := build
 
