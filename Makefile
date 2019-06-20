@@ -10,7 +10,7 @@ AWS_S3_KEY := functions/pipeline/transformer
 DEPS := build
 
 requirements.txt:
-	pipenv lock -r requirements.txt
+	pipenv lock -r > requirements.txt
 
 $(DEPS): requirements.txt
 	mkdir -p $(DEPS)
