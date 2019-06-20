@@ -2,9 +2,10 @@
 #           --rm \
 #           --privileged \
 #           -v $PWD:$PWD \
+#           -w $PWD \
 #           --cap-add SYS_PTRACE \
 #           pyflame \
-#             -o $PWD/profile.txt \
+#             -o profile.txt \
 #             -t python -c 'for x in range(1000): print(x)'
 FROM ubuntu:bionic
 LABEL maintainer "Cole Hudson <cole@colejhudson.com>"
