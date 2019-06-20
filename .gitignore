@@ -6,3 +6,5 @@ profile.txt
 __pycache__
 dist
 *.egg-info
+
+*.zip
