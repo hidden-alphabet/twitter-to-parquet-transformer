@@ -11,7 +11,7 @@ curl \
   "https://twitter.com/search?q=tesla%20lang%3Aen%20since%3A2014-01-01%20&src=typd" \
   > $HTML
 
-pyflame -o $STACKTRACE -t python3 script.py $HTML
+pyflame -s 10 -o $STACKTRACE -t python3 script.py $HTML
 
 echo 'Creating flamegraph.'
 
