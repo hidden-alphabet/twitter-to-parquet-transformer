@@ -17,12 +17,10 @@ $(DEPS): requirements.txt
 	pip install -r requirements.txt --no-deps -t $(DEPS) 
 
 $(FN_BUNDLE): $(DEPS)
-	cd $(DEPS)
-	zip -r ../$(FN_BUNDLE) .
-	cd ..
+	cd $(DEPS) && zip -r ../$(FN_BUNDLE) .
 	zip -r $(FN_BUNDLE) ./hidden_alphabet
-	cd hidden_alphabet/aws/functions
-	zip -r ../../../$(FN_BUNDLE) ./twitter_search_html_to_parquet.py
+	cd hidden_alphabet/aws/functions && \
+		zip -r ../../../$(FN_BUNDLE) ./twitter_search_html_to_parquet.py
 
 bundle: $(FN_BUNDLE) 
 
