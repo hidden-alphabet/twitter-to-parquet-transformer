@@ -7,7 +7,7 @@ FN_BUNDLE := $(FN_NAME).zip
 AWS_S3_BUCKET := hidden-alphabet
 AWS_S3_KEY := functions
 
-DEPS := build
+DEPS := dependencies
 
 requirements.txt:
 	pipenv lock -r > requirements.txt
