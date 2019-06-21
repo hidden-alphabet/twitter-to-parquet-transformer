@@ -25,7 +25,7 @@ def pytype_to_pyarrow_type(
     if t is dict:
 	# PyArrow, currently, does not correctly handle the management of
 	# complexly typed parquet structures. In particular, if the line
-	# below this comment is removed, line 49 of this file fails in the
+	# below this comment is removed, line 70 of this file fails in the
 	# manner illustrated below:
 	#
 	# >>> utils.list_of_dicts_to_pyarrow_table([{ 'foo': { 'bar': {}, 'bac': {}, 'foo': 1 } }])
