@@ -14,14 +14,15 @@ requirements.txt:
 
 $(DEPS): requirements.txt
 	mkdir -p $(DEPS)
-	pip install \
+	pip download \
 		--no-deps \
 		--abi cp36m \
 		--python-version 3 \
 		--implementation cp \
 		--platform manylinux1_x86_64 \
 		-r requirements.txt \
-		-t $(DEPS)
+		-d $(DEPS)
+	cd $(DEPS) && unzip *.whl
 	cd $(DEPS) && rm -r *.dist-info __pycache__
 
 $(FN_BUNDLE): $(DEPS)
