@@ -14,7 +14,7 @@ requirements.txt:
 
 $(DEPS): requirements.txt
 	mkdir -p $(DEPS)
-	pip3 install \
+	pip install \
 		--no-deps \
 		--abi cp36m \
 		--python-version 3 \
