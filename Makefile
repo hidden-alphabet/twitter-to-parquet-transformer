@@ -34,11 +34,11 @@ $(FN_BUNDLE): $(DEPS)
 bundle: $(FN_BUNDLE)
 
 build:
-	DOCKER_CONTAINER := $(shell docker create hidden_alphabet:twitter-to-parquet/build)
+	DOCKER_CONTAINER := $(shell docker create hidden_alphabet:twitter-to-parquet-builder)
 	docker cp $(DOCKER_CONTAINER):/twitter-to-parquet-transformer/hidden-alphabet-twitter-html-to-parquet.zip .
 
 profile:
-	docker run hidden_alphabet:twitter-to-parquet/profile
+	docker run hidden_alphabet:twitter-to-parquet-profiler
 
 deploy: $(FN_BUNDLE) upload
 	aws lambda create-function \
