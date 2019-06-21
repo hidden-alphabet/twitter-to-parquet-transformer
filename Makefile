@@ -39,7 +39,7 @@ deploy: $(FN_BUNDLE)
 	aws lambda create-function \
 		--function-name $(FN_NAME) \
 		--runtime python3.7 \
-		--handler twitter_search_html_to_parquet.handler\
+		--handler hidden_alphabet.aws.functions.twitter_search_html_to_parquet.handler\
 		--timeout 60 \
 		--role $(FN_ROLE_ARN) \
 		--zip-file fileb://$(FN_BUNDLE)
