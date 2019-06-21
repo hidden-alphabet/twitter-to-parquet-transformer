@@ -1,10 +1,12 @@
 AWS_USER_ID := $(shell aws sts get-caller-identity | jq '.["UserId"]' | tr -d '"')
 
-FN_NAME := hidden-alphabet-twitter-html-to-parquet
+ORG := hidden-alphabet
+PROJECT := twitter-to-parquet
+FN_NAME := $(ORG)-$(PROJECT)
 FN_ROLE_ARN := arn:aws:iam::$(AWS_USER_ID):role/aws-lambda-cli-role
 FN_BUNDLE := $(FN_NAME).zip
 
-AWS_S3_BUCKET := hidden-alphabet
+AWS_S3_BUCKET := $(ORG)
 AWS_S3_KEY := functions
 
 DEPS := dependencies
@@ -34,11 +36,12 @@ $(FN_BUNDLE): $(DEPS)
 bundle: $(FN_BUNDLE)
 
 build:
-	DOCKER_CONTAINER := $(shell docker create hidden_alphabet:twitter-to-parquet-builder)
-	docker cp $(DOCKER_CONTAINER):/twitter-to-parquet-transformer/hidden-alphabet-twitter-html-to-parquet.zip .
+	docker cp \
+		$(shell docker create hidden_alphabet:$(PROJECT)-builder):/$(PROJECT)-transformer/$(FN_BUNDLE) \
+		.
 
 profile:
-	docker run hidden_alphabet:twitter-to-parquet-profiler
+	docker run hidden_alphabet:$(PROJECT)-profiler
 
 deploy: $(FN_BUNDLE) upload
 	aws lambda create-function \
