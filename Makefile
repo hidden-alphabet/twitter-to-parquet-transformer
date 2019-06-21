@@ -25,7 +25,6 @@ $(DEPS): requirements.txt
 		-r requirements.txt \
 		-d $(DEPS)
 	cd $(DEPS) && unzip "*.whl" -d $(DEPS)
-	cd $(DEPS) && cp -R $(DEPS)/beautifulsoup4 $(DEPS)/bs4
 	cd $(DEPS) && \
 		(rm -rf *.dist-info || true) && \
 		(rm -rf __pycache__ || true)
