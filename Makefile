@@ -22,6 +22,7 @@ $(DEPS): requirements.txt
 		--platform manylinux1_x86_64 \
 		-r requirements.txt \
 		-t $(DEPS)
+	cd $(DEPS) && rm -r *.dist-info __pycache__
 
 $(FN_BUNDLE): $(DEPS)
 	cd $(DEPS) && zip -r ../$(FN_BUNDLE) .
