@@ -60,6 +60,8 @@ update: build
 upload: build
 	aws s3 mv $(FN_BUNDLE) s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE)
 
+push: upload update
+
 clean:
 	rm -rf build
 	rm $(FN_BUNDLE)
