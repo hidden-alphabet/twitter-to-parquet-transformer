@@ -35,7 +35,14 @@ $(FN_BUNDLE): $(DEPS)
 
 bundle: $(FN_BUNDLE)
 
-deploy: $(FN_BUNDLE) 
+build:
+	DOCKER_CONTAINER := $(shell docker create hidden_alphabet:twitter-to-parquet/build)
+	docker cp $(DOCKER_CONTAINER):/twitter-to-parquet-transformer/hidden-alphabet-twitter-html-to-parquet.zip .
+
+profile:
+	docker run hidden_alphabet:twitter-to-parquet/profile
+
+deploy: $(FN_BUNDLE) upload
 	aws lambda create-function \
 		--function-name $(FN_NAME) \
 		--runtime python3.7 \
@@ -50,7 +57,7 @@ update: $(FN_BUNDLE)
 		--zip-file fileb://$(FN_BUNDLE)
 
 upload: $(FN_BUNDLE)
-	aws s3 mv $(FN_BUNDLE) s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE) 
+	aws s3 mv $(FN_BUNDLE) s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE)
 
 clean:
 	rm -rf build
