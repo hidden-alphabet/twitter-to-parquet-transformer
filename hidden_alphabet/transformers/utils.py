@@ -1,13 +1,14 @@
 import pyarrow as pa
 
 def objects_to_pyarrow_table(
-        objects, 
-        type_map={ 
-            bool: pa.bool_, 
-            int: pa.int64, 
-            bytes: pa.binary, 
+        objects,
+        type_map={
+            bool: pa.bool_,
+            int: pa.int64,
+            bytes: pa.binary,
             str: pa.string,
-            dict: pa.struct
+            dict: pa.struct,
+            list: pa.list_
         }
     ):
     columns = list(objects[0].keys())
