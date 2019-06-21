@@ -28,7 +28,7 @@ def tweet_element_to_dictionary(el):
         'tweet_text_html': el.find("p", {"class" : "tweet-text"}).renderContents(),
         'tweet_text': el.find("p", {"class" : "tweet-text"}).text,
         'tweet_time': el.find("a", {"class": "tweet-timestamp"}).attrs.get('title'),
-        'tweet-nonce': el.attrs.get('data-tweet-nonce'),
+        'tweet_nonce': el.attrs.get('data-tweet-nonce'),
         'tweet_language': el.find("p", {"class" : "tweet-text"}).attrs.get('lang'),
         'tweet_timestamp_ms': el.find("span",{"class" : "_timestamp"}).attrs.get("data-time-ms"),
         'tweet_permalink': el.attrs.get('data-permalink-path'),
