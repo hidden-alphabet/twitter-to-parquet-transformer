@@ -25,6 +25,7 @@ $(DEPS): requirements.txt
 		-r requirements.txt \
 		-d $(DEPS)
 	cd $(DEPS) && unzip "*.whl" -d $(DEPS)
+	cd $(DEPS) && cp -R $(DEPS)/beautifulsoup4 $(DEPS)/bs4
 	cd $(DEPS) && \
 		(rm -rf *.dist-info || true) && \
 		(rm -rf __pycache__ || true)
@@ -36,9 +37,7 @@ $(FN_BUNDLE): $(DEPS)
 bundle: $(FN_BUNDLE)
 
 build:
-	docker cp \
-		$(shell docker create hidden_alphabet:$(PROJECT)-builder):/$(PROJECT)-transformer/$(FN_BUNDLE) \
-		.
+	docker cp $(shell docker create hidden_alphabet:$(PROJECT)-builder):/$(PROJECT)-transformer/$(FN_BUNDLE) .
 
 profile:
 	docker run hidden_alphabet:$(PROJECT)-profiler
