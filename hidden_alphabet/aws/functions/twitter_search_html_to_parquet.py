@@ -1,4 +1,5 @@
 from hidden_alphabet.transformers import twitter
+from hidden_alphabet.transformers import utils
 from multiprocessing.dummy import Pool
 from s3fs import S3FileSystem
 import multiprocessing as mp
@@ -18,7 +19,7 @@ def extract_transform_load(path):
     objects = twitter.html_to_objects(html)
 
     print('Parsing twitter artifacts into pyarrow')
-    table = twitter.objects_to_pyarrow_table(objects)
+    table = utils.objects_to_pyarrow_table(objects)
     
     out = path.replace('.html', '.parquet').replace('raw', 'processed') 
 
