@@ -49,7 +49,7 @@ deploy: $(FN_BUNDLE) upload
 		--handler hidden_alphabet.aws.functions.twitter_search_html_to_parquet.handler\
 		--timeout 60 \
 		--role $(FN_ROLE_ARN) \
-		--zip-file fileb://$(FN_BUNDLE)
+		--zip-file s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE)
 
 update: $(FN_BUNDLE)
 	aws lambda update-function-code \
