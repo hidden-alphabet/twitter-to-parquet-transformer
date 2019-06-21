@@ -55,7 +55,7 @@ deploy: build upload
 update: build
 	aws lambda update-function-code \
 		--function-name $(FN_NAME) \
-		--zip-file fileb://$(FN_BUNDLE)
+		--zip-file s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE)
 
 upload: build
 	aws s3 mv $(FN_BUNDLE) s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE)
