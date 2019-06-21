@@ -23,7 +23,9 @@ $(DEPS): requirements.txt
 		-r requirements.txt \
 		-d $(DEPS)
 	cd $(DEPS) && unzip "*.whl" -d $(DEPS)
-	cd $(DEPS) && rm -r *.dist-info __pycache__
+	cd $(DEPS) && \
+		(rm -rf *.dist-info || true) && \
+		(rm -rf __pycache__ || true)
 
 $(FN_BUNDLE): $(DEPS)
 	cd $(DEPS) && zip -r ../$(FN_BUNDLE) .
