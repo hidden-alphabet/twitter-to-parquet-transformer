@@ -22,7 +22,7 @@ $(DEPS): requirements.txt
 		--platform manylinux1_x86_64 \
 		-r requirements.txt \
 		-d $(DEPS)
-	cd $(DEPS) && unzip *.whl
+	cd $(DEPS) && unzip "*.whl" -d $(DEPS)
 	cd $(DEPS) && rm -r *.dist-info __pycache__
 
 $(FN_BUNDLE): $(DEPS)
@@ -31,7 +31,7 @@ $(FN_BUNDLE): $(DEPS)
 	cd hidden_alphabet/aws/functions && \
 		zip -r ../../../$(FN_BUNDLE) ./twitter_search_html_to_parquet.py
 
-bundle: $(FN_BUNDLE) 
+bundle: $(FN_BUNDLE)
 
 deploy: $(FN_BUNDLE) 
 	aws lambda create-function \
