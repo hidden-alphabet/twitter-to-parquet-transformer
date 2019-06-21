@@ -14,7 +14,14 @@ requirements.txt:
 
 $(DEPS): requirements.txt
 	mkdir -p $(DEPS)
-	pip install -r requirements.txt --no-deps -t $(DEPS) 
+	pip3 install \
+		--no-deps \
+		--abi cp36m \
+		--python-version 3 \
+		--implementation cp \
+		--platform manylinux1_x86_64 \
+		-r requirements.txt \
+		-t $(DEPS)
 
 $(FN_BUNDLE): $(DEPS)
 	cd $(DEPS) && zip -r ../$(FN_BUNDLE) .
