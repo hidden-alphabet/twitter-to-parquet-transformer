@@ -43,7 +43,7 @@ build:
 profile:
 	docker run hidden_alphabet:$(PROJECT)-profiler
 
-deploy: $(FN_BUNDLE) upload
+deploy: build upload
 	aws lambda create-function \
 		--function-name $(FN_NAME) \
 		--runtime python3.7 \
@@ -52,12 +52,12 @@ deploy: $(FN_BUNDLE) upload
 		--role $(FN_ROLE_ARN) \
 		--zip-file s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE)
 
-update: $(FN_BUNDLE)
+update: build
 	aws lambda update-function-code \
 		--function-name $(FN_NAME) \
 		--zip-file fileb://$(FN_BUNDLE)
 
-upload: $(FN_BUNDLE)
+upload: build
 	aws s3 mv $(FN_BUNDLE) s3://$(AWS_S3_BUCKET)/$(AWS_S3_KEY)/$(FN_BUNDLE)
 
 clean:
